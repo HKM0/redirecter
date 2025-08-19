@@ -46,7 +46,7 @@ async function checkAndRedirect() {
     const response = await fetch('source/trusted.txt');
     const trustedDomains = (await response.text()).split('\n').map(d => d.trim()).filter(Boolean);
 
-    if (trustedDomains.includes(domain)) {
+    if (trustedDomains.includes(domain) || domain == "store" || domain == "launch") {
         // Trusted domain: azonnali redirect
         if (newtab) window.open(decodedLink, "_blank");
         else window.location.href = decodedLink;

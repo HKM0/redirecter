@@ -3,26 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirect...</title>
-  <script>
-    window.onload = () => {
-      const path = window.location.pathname.split("/").filter(Boolean);
-      if (path.length === 2) {
-        const [mode, appId] = path;
-        let targetUrl = null;
+<!-- index.html a heki.lol gyökérben -->
+<script>
+const path = window.location.pathname; // pl. "/steam-store/730"
+const parts = path.split("/").filter(Boolean); // ["steam-store", "730"]
 
-        if (mode === "steam-store") {
-          targetUrl = `steam://store/${appId}`;
-        } else if (mode === "steam-play") {
-          targetUrl = `steam://run/${appId}`;
-        }
+if (parts.length === 2) {
+  const mode = parts[0];      // "steam-store"
+  const appId = parts[1];     // "730"
 
-        if (targetUrl) {
-          window.location.href = targetUrl;
-        }
-      }
-      // ha nincs vagy rossz mód, marad az index.html
-    };
-  </script>
+  if (mode === "steam-store") {
+    window.location.href = `steam://store/${appId}`;
+  } else if (mode === "steam-play") {
+    window.location.href = `steam://run/${appId}`;
+  } else {
+    window.location.href = "/"; // rossz mód → vissza a főoldalra
+  }
+} else {
+  // root vagy hibás útvonal
+  document.body.innerHTML = "<h1>Welcome to heki.lol</h1>";
+}
+</script>
+
 </head>
 <body>
   <h1>Steam redirector</h1>

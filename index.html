@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirect...</title>
-<!-- index.html a heki.lol gyökérben -->
-<script>
-const path = window.location.pathname; // pl. "/steam-store/730"
-const parts = path.split("/").filter(Boolean); // ["steam-store", "730"]
-
-if (parts.length === 2) {
-  const mode = parts[0];      // "steam-store"
-  const appId = parts[1];     // "730"
-
-  if (mode === "steam-store") {
-    window.location.href = `steam://store/${appId}`;
-  } else if (mode === "steam-play") {
-    window.location.href = `steam://run/${appId}`;
-  } else {
-    window.location.href = "/"; // rossz mód → vissza a főoldalra
-  }
-} else {
-  // root vagy hibás útvonal
-  document.body.innerHTML = "<h1>Welcome to heki.lol</h1>";
-}
-</script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Redirect</title>
+  <link rel="stylesheet" href="source\styles.css" />
 </head>
 <body>
-  <h1>Steam redirector</h1>
-  <p>Használat: <code>/steam-store/&lt;app_id&gt;</code> vagy <code>/steam-play/&lt;app_id&gt;</code></p>
+  <div class="glass" id="generator">
+    <h2>Custom Link Generator</h2>
+    <label>Enter Link:
+      <input type="text" id="linkInput" placeholder="https://example.com" />
+    </label>
+    <label>
+      <input type="checkbox" id="newTabCheckbox" /> Open in new tab
+    </label>
+    <button onclick="generateLink()">Generate Redirect Link</button>
+    <div id="output" style="display:none; margin-top:15px;"></div>
+  </div>
+
+  <script src="source\script.js"></script>
 </body>
 </html>

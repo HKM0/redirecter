@@ -1,0 +1,50 @@
+body {
+    background: linear-gradient(135deg, #000f28, #1f0028);
+    color: lemonchiffon;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    text-shadow: 0px 0px 10px rgba(255, 100, 100, 1);
+}
+
+.glass {
+    background: rgba(200, 200, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 32px;
+    padding: 25px;
+    box-shadow: 0 0px 10px rgba(255, 100, 100, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 100, 100, 1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 32px;
+    border: 1px solid rgba(200, 200, 255, 1);
+    background: rgba(200, 200, 255, 0.15);
+    color: lemonchiffon;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: rgba(100, 255, 100, 0.4);
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}

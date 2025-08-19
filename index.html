@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirect...</title>
+  <script>
+    window.onload = () => {
+      const path = window.location.pathname.split("/").filter(Boolean);
+      if (path.length === 2) {
+        const [mode, appId] = path;
+        let targetUrl = null;
+
+        if (mode === "steam-store") {
+          targetUrl = `steam://store/${appId}`;
+        } else if (mode === "steam-play") {
+          targetUrl = `steam://run/${appId}`;
+        }
+
+        if (targetUrl) {
+          window.location.href = targetUrl;
+        }
+      }
+      // ha nincs vagy rossz mód, marad az index.html
+    };
+  </script>
+</head>
+<body>
+  <h1>Steam redirector</h1>
+  <p>Használat: <code>/steam-store/&lt;app_id&gt;</code> vagy <code>/steam-play/&lt;app_id&gt;</code></p>
+</body>
+</html>

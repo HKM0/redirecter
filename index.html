@@ -3,22 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Redirect</title>
-  <link rel="stylesheet" href="source\styles.css" />
+  <title>Heki - home 🏠</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="source/main-styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-  <div class="glass" id="generator">
-    <h2>Custom Link Generator</h2>
-    <label>Enter Link:
-      <input type="text" id="linkInput" placeholder="https://example.com" />
-    </label>
-    <label>
-      <input type="checkbox" id="newTabCheckbox" /> Open in new tab
-    </label>
-    <button onclick="generateLink()">Generate Redirect Link</button>
-    <div id="output" style="display:none; margin-top:15px;"></div>
-  </div>
+  <!-- Csillagmezők (parallax) -->
+  <div id="stars" aria-hidden="true"></div>
+  <div id="stars2" aria-hidden="true"></div>
+  <div id="stars3" aria-hidden="true"></div>
 
-  <script src="source\script.js"></script>
+  <!-- Hullócsillagok -->
+  <section class="shooting-stars" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </section>
+
+  <!-- Egyedi kurzor elemek -->
+  <div id="cursor"></div>
+  <div id="cursorPt"></div>
+
+  <!-- Navigáció -->
+  <nav class="nav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span class="sr-only">Menu</span>
+    </button>
+    <div class="nav-menu" id="navMenu">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="redirecter.html" class="nav-link">URL Redirecter</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="section flex flex-col items-center justify-center text-center" style="min-height: 100vh;">
+    <div class="container">
+      <h1 class="heading-1 text-gradient">Heki</h1>
+      <p class="heading-2" style="color: var(--text-secondary); font-weight: 400;">i don't know what to do...</p>
+      <p style="color: var(--text-muted); max-width: 600px; margin: var(--space-lg) auto var(--space-xl);">
+        Trying to pickl up the pieces of my life...
+        In spare time i program in python, java, experimenting with react-spring, and cutting-edge web technologies.
+      </p>
+      <div class="flex gap-4 justify-center">
+        <a href="#projects" class="btn btn-primary btn-pulse">View Projects</a>
+        <a href="#contact" class="btn btn-glass">Get in Touch</a>
+      </div>
+    </div>
+  </section> 
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <h2 class="heading-2">Featured Projects</h2>
+        <p style="color: var(--text-secondary);">A collection of my recent work and experiments</p>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">URL Redirecter</h3>
+            <p class="card-description">
+              A secure URL redirection service with Base64 encoding, 
+              domain validation, and user-friendly interface.
+            </p>
+          </div>
+          <div style="margin-top: auto;">
+            <div style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-lg); flex-wrap: wrap;">
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">JavaScript</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">HTML5</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">CSS3</span>
+            </div>
+            <a href="redirecter.html" class="btn btn-primary" style="width: 100%;">View Project</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Home Website</h3>
+            <p class="card-description">
+              Modern portfolio built with clean HTML, CSS, and vanilla JavaScript. 
+              Features glass morphism design and smooth animations.
+            </p>
+          </div>
+          <div style="margin-top: auto;">
+            <div style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-lg); flex-wrap: wrap;">
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">CSS3</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">Design</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">UI/UX</span>
+            </div>
+            <button class="btn btn-glass" style="width: 100%;" disabled>Current Page</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Coming Soon</h3>
+            <p class="card-description">
+              New exciting projects are in development. Stay tuned for updates 
+              and follow my journey as I build innovative solutions.
+            </p>
+          </div>
+          <div style="margin-top: auto;">
+            <div style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-lg); flex-wrap: wrap;">
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">React</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">Node.js</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">MongoDB</span>
+            </div>
+            <button class="btn btn-glass" style="width: 100%;" disabled>In Development</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="grid grid-cols-2 gap-6 items-center">
+        <div>
+          <h2 class="heading-2">About Me</h2>
+          <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+            I'm a passionate developer with a keen eye for design and user experience. 
+            I love creating clean, efficient, and scalable applications that solve real-world problems.
+          </p>
+          <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+            When I'm not coding, you can find me exploring new technologies, tinkering with something, 
+            or playing games.
+          </p>
+          <div class="flex gap-4">
+            <a href="#contact" class="btn btn-primary">Let's Connect</a>
+            <a href="#" class="btn btn-glass"><s>Download CV</s></a>
+          </div>
+        </div>
+        <div class="glass-subtle" style="padding: var(--space-xl); border-radius: var(--radius-xl);">
+          <h3 style="margin-bottom: var(--space-lg); color: var(--text-primary);">Tech Stack</h3>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md);">
+            <div>
+              <h4 style="color: var(--accent-color); margin-bottom: var(--space-sm); font-size: var(--font-size-sm);">Frontend</h4>
+              <ul style="list-style: none; color: var(--text-secondary); font-size: var(--font-size-sm);">
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Bootstrap</li>
+                <li>PyQt</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--accent-color); margin-bottom: var(--space-sm); font-size: var(--font-size-sm);">Backend</h4>
+              <ul style="list-style: none; color: var(--text-secondary); font-size: var(--font-size-sm);">
+                <li>Spring</li>
+                <li>Node.js</li>
+                <li>MongoDB</li>
+                <li>Django</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container text-center">
+      <h2 class="heading-2" style="margin-bottom: var(--space-lg);">Find me here</h2>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto var(--space-xl);">
+        You can find me on several platfroms, for example Steam and Github.
+        Thank you for reading thorugh all this.
+      </p>
+      <div class="flex gap-4 justify-center">
+        <a href="https://github.com/HKM0" class="btn btn-primary" target="_blank">GitHub</a>
+        <a href="https://steamcommunity.com/id/hkmo/" class="btn btn-glass" target="_blank">Steam</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="source/main-script.js"></script>
 </body>
 </html>
+

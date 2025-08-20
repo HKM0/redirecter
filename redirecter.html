@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Redirecter 🔗 - Heki</title>
+  <link rel="stylesheet" href="source/main-styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <!-- Egyedi kurzor -->
+  <div id="cursor"></div>
+  <div id="cursorPt"></div>
+
+  <!-- Csillagmezők (parallax) -->
+  <div id="stars" aria-hidden="true"></div>
+  <div id="stars2" aria-hidden="true"></div>
+  <div id="stars3" aria-hidden="true"></div>
+  
+  <!-- Hullócsillagok -->
+  <section class="shooting-stars" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </section>
+
+  <!-- Navigáció -->
+  <nav class="nav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span class="sr-only">Menu</span>
+    </button>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#" class="nav-link">URL Redirecter</a>
+    </div>
+  </nav>
+
+  <!-- Fő tartalom -->
+  <main class="flex flex-col items-center justify-center" style="min-height: 100vh; padding: var(--space-lg);">
+    <div class="container" style="max-width: 600px;">
+      <!-- Fejléc -->
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <h1 class="heading-1 text-gradient">URL Redirecter</h1>
+        <p style="color: var(--text-secondary);">
+          Create secure redirect links with custom domain validation
+        </p>
+      </div>
+
+      <!-- Generálás űrlap -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Generate Redirect Link</h2>
+          <p class="card-description">
+            Enter a URL below to create a secure redirect link with optional new tab opening.
+          </p>
+        </div>
+
+        <form id="redirectForm" style="margin-bottom: var(--space-lg);">
+          <div class="form-group">
+            <label for="linkInput" class="form-label">Destination URL</label>
+            <input 
+              type="url" 
+              id="linkInput" 
+              class="form-input" 
+              placeholder="https://example.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input 
+                type="checkbox" 
+                id="newTabCheckbox" 
+                class="checkbox-input"
+              />
+              <label for="newTabCheckbox" class="form-label" style="margin-bottom: 0;">
+                Open in new tab
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-pulse" style="width: 100%;">
+            Generate Redirect Link
+          </button>
+        </form>
+
+        <!-- Kimenet -->
+        <div id="output" style="display: none;">
+          <div style="padding: var(--space-lg); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-lg); margin-top: var(--space-lg);">
+            <h3 style="color: var(--success-color); margin-bottom: var(--space-sm); font-size: var(--font-size-lg);">
+              ✓ Redirect Link Generated
+            </h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-md); font-size: var(--font-size-sm);">
+              Your secure redirect link is ready to use:
+            </p>
+            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-md);">
+              <div id="generatedLink" style="word-break: break-all; color: var(--accent-color); font-family: 'Monaco', 'Menlo', monospace; font-size: var(--font-size-sm);"></div>
+            </div>
+            <div style="display: flex; gap: var(--space-sm);">
+              <button id="copyButton" class="btn btn-glass" style="flex: 1;">
+                📋 Copy Link
+              </button>
+              <button id="testButton" class="btn btn-glass" style="flex: 1;">
+                🔗 Test Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="grid grid-cols-2 gap-4" style="margin-top: var(--space-xl);">
+        <div class="glass-subtle" style="padding: var(--space-lg);">
+          <h3 style="color: var(--accent-color); margin-bottom: var(--space-sm);">🔒 Security</h3>
+          <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+            Links are encoded and validated against trusted domains for your safety.
+          </p>
+        </div>
+        <div class="glass-subtle" style="padding: var(--space-lg);">
+          <h3 style="color: var(--accent-color); margin-bottom: var(--space-sm);">⚡ Fast</h3>
+          <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+            Instant redirects for trusted domains, confirmation for unknown ones.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="source/script.js"></script>
+  <script src="source/main-script.js"></script>
+</body>
+</html>

@@ -281,9 +281,9 @@ function initClipboard() {
 // Csillagmező generálása futásidőben (box-shadow stringek)
 function generateStarField() {
   const configs = [
-    { id: 'stars', count: 700, size: 1, afterTop: 2000, duration: 50 },
-    { id: 'stars2', count: 200, size: 2, afterTop: 2000, duration: 100 },
-    { id: 'stars3', count: 100, size: 3, afterTop: 2000, duration: 150 }
+    { id: 'stars', count: 700, size: 1, afterTop: 2000, duration: 50, opacity: 0.85 },
+    { id: 'stars2', count: 200, size: 2, afterTop: 2000, duration: 100, opacity: 0.5 },
+    { id: 'stars3', count: 100, size: 3, afterTop: 2000, duration: 150, opacity: 0.25 }
   ];
 
   const MAX_TOTAL = 1200;
@@ -293,52 +293,77 @@ function generateStarField() {
     configs.forEach(c => c.count = Math.max(20, Math.round(c.count * scale)));
   }
 
-  configs.forEach(cfg => {
-    const container = document.getElementById(cfg.id);
-    if (!container) return;
+  // Generáló függvény amit resize eseményre is tudunk újrahívni
+  function build() {
+    const vw = Math.max(window.innerWidth || document.documentElement.clientWidth, 1200);
+    const vh = Math.max(window.innerHeight || document.documentElement.clientHeight, 800);
 
-    const shadows = [];
-    const widthLimit = 2000;
-    const heightLimit = 2000;
+    configs.forEach(cfg => {
+      let container = document.getElementById(cfg.id);
+      if (!container) {
+        container = document.createElement('div');
+        container.id = cfg.id;
+        document.body.appendChild(container);
+      }
 
-    for (let i = 0; i < cfg.count; i++) {
-      const x = Math.floor(Math.random() * widthLimit);
-      const y = Math.floor(Math.random() * heightLimit);
-      shadows.push(`${x}px ${y}px #FFF`);
-    }
+      const widthLimit = Math.ceil(vw * 1.2); 
+      const heightLimit = Math.ceil(vh * 1.6);
 
-    container.style.width = `${cfg.size}px`;
-    container.style.height = `${cfg.size}px`;
-    container.style.background = 'transparent';
-    container.style.boxShadow = shadows.join(', ');
+      const shadows = [];
+      for (let i = 0; i < cfg.count; i++) {
+        const x = Math.floor(Math.random() * widthLimit);
+        const y = Math.floor(Math.random() * heightLimit);
+        shadows.push(`${x}px ${y}px #FFF`);
+      }
 
-    container.style.position = 'fixed';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.pointerEvents = 'none';
-    container.style.zIndex = '0';
-    container.style.animation = `animStar ${cfg.duration}s linear infinite`;
-    container.style.willChange = 'transform';
+      // Alap stílusok (megjegyzés: a main-styles.css felülírhat részleteket)
+      container.style.width = `${cfg.size}px`;
+      container.style.height = `${cfg.size}px`;
+      container.style.background = 'transparent';
+      container.style.boxShadow = shadows.join(', ');
+      container.style.position = 'fixed';
+      container.style.top = '0';
+      container.style.left = '0';
+      container.style.pointerEvents = 'none';
+      container.style.zIndex = '0';
+      container.style.animation = `animStar ${cfg.duration}s linear infinite`;
+      container.style.willChange = 'transform';
+      container.style.opacity = cfg.opacity;
 
-    let after = document.getElementById(cfg.id + '-after');
-    if (!after) {
-      after = document.createElement('div');
-      after.id = cfg.id + '-after';
-      document.body.appendChild(after);
-    }
+      // after elem létrehozása/aktualizálása és DOM-hoz adása
+      let after = document.getElementById(cfg.id + '-after');
+      if (!after) {
+        after = document.createElement('div');
+        after.id = cfg.id + '-after';
+        document.body.appendChild(after);
+      }
 
-    after.style.position = 'fixed';
-    after.style.left = '0';
-    after.style.top = cfg.afterTop + 'px';
-    after.style.width = `${cfg.size}px`;
-    after.style.height = `${cfg.size}px`;
-    after.style.background = 'transparent';
-    after.style.pointerEvents = 'none';
-    after.style.zIndex = '0';
-    after.style.boxShadow = container.style.boxShadow;
-    after.style.animation = container.style.animation;
-    after.style.willChange = 'transform';
+      after.style.position = 'fixed';
+      after.style.left = '0';
+      after.style.top = cfg.afterTop + 'px';
+      after.style.width = `${cfg.size}px`;
+      after.style.height = `${cfg.size}px`;
+      after.style.background = 'transparent';
+      after.style.pointerEvents = 'none';
+      after.style.zIndex = '0';
+      after.style.boxShadow = container.style.boxShadow;
+      after.style.animation = container.style.animation;
+      after.style.willChange = 'transform';
+      after.style.opacity = cfg.opacity;
+    });
+  }
+
+  // Debounce resize handler -> újrageneráljuk a csillagokat a viewport változásakor
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      build();
+    }, 180);
   });
+
+  // Első generálás
+  build();
 }
 
 // Inicializálás DOMContentLoaded után

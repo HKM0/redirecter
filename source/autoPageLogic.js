@@ -5,7 +5,7 @@ const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("content");
 let currentPath = "";
 
-// github api hivas
+// github api hivas     
 async function loadDir(path = "") {
   currentPath = path;
   const url = `https://api.github.com/repos/${user}/${repo}/contents/${path}?ref=${branch}`;
@@ -79,7 +79,24 @@ async function loadFile(path) {
     const text = await fetch(url).then(r => r.text());
     contentHtml += marked.parse(text);
   } else if (ext === "pdf") {
-    contentHtml += `<iframe src="${url}" width="100%" height="800px" style="border-radius: var(--radius-lg); border: 1px solid var(--border-color);"></iframe>`;
+    const pdfViewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
+    const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+    
+    contentHtml += `
+      <div style="position: relative; width: 100%; min-height: calc(100vh - 280px); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color);">
+        <iframe src="${pdfViewerUrl}" 
+                width="100%" 
+                height="calc(100vh - 280px)" 
+                style="border: none; border-radius: var(--radius-lg); background: var(--secondary-bg);"
+                title="PDF Preview: ${fileName}"
+                onerror="this.src='${googleViewerUrl}'">
+        </iframe>
+        <div style="margin-top: var(--space-md); text-align: center; display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <a href="${url}" target="_blank" class="file-download">📄 Eredeti PDF megnyitása</a>
+          <a href="${googleViewerUrl}" target="_blank" class="file-download" style="background: #4285f4;">📖 Google Docs Viewer</a>
+        </div>
+      </div>
+    `;
   } else if (["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "ico"].includes(ext)) {
     contentHtml += `
       <div style="text-align: center; margin: var(--space-lg) 0;">
@@ -96,9 +113,11 @@ async function loadFile(path) {
         </p>
       </div>
     `;
-  } else if (["py","java","c","cpp","js","html","css","hs","json","xml","yml","yaml"].includes(ext)) {
+  } else if (["py","java","c","cpp","js","html","css","hs","haskell","json","xml","yml","yaml","cs","csharp"].includes(ext)) {
     const code = await fetch(url).then(r => r.text());
-    contentHtml += `<pre><code class="language-${ext}">${escapeHtml(code)}</code></pre>`;
+    const language = ext === "hs" || ext === "haskell" ? "haskell" : 
+                    ext === "cs" || ext === "csharp" ? "csharp" : ext;
+    contentHtml += `<pre><code class="language-${language}">${escapeHtml(code)}</code></pre>`;
     content.innerHTML = contentHtml;
     hljs.highlightAll();
     return;

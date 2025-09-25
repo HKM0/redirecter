@@ -8,16 +8,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-  <!-- Egyedi kurzor -->
+  <!-- kurzor -->
   <div id="cursor"></div>
   <div id="cursorPt"></div>
 
-  <!-- Csillagmezők (parallax) -->
+  <!-- csillagmezok -->
   <div id="stars" aria-hidden="true"></div>
   <div id="stars2" aria-hidden="true"></div>
   <div id="stars3" aria-hidden="true"></div>
   
-  <!-- Hullócsillagok -->
+  <!-- hullocsillagok -->
   <section class="shooting-stars" aria-hidden="true">
     <span></span>
     <span></span>
@@ -31,21 +31,22 @@
     <span></span>
   </section>
 
-  <!-- Navigáció -->
+  <!-- navigacio -->
   <nav class="nav">
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
       <span class="sr-only">Menu</span>
     </button>
     <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="#" class="nav-link">URL Redirecter</a>
+      <a href="#" class="nav-link-active">URL Redirecter</a>
+      <a href="elteikbsc.html" class="nav-link">ELTE IK BSC</a>
     </div>
   </nav>
 
-  <!-- Fő tartalom -->
+  <!-- fo tartalom -->
   <main class="flex flex-col items-center justify-center" style="min-height: 100vh; padding: var(--space-lg);">
     <div class="container" style="max-width: 600px;">
-      <!-- Fejléc -->
+      <!-- fejlec -->
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
         <h1 class="heading-1 text-gradient">URL Redirecter</h1>
         <p style="color: var(--text-secondary);">
@@ -53,7 +54,7 @@
         </p>
       </div>
 
-      <!-- Generálás űrlap -->
+      <!-- generalas urlap -->
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">Generate Redirect Link</h2>
@@ -66,7 +67,7 @@
           <div class="form-group">
             <label for="linkInput" class="form-label">Destination URL</label>
             <input 
-              type="url" 
+              type="text" 
               id="linkInput" 
               class="form-input" 
               placeholder="https://example.com"
@@ -92,7 +93,7 @@
           </button>
         </form>
 
-        <!-- Kimenet -->
+        <!-- kimenet -->
         <div id="output" style="display: none;">
           <div style="padding: var(--space-lg); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-lg); margin-top: var(--space-lg);">
             <h3 style="color: var(--success-color); margin-bottom: var(--space-sm); font-size: var(--font-size-lg);">
@@ -116,7 +117,7 @@
         </div>
       </div>
 
-      <!-- Info -->
+      <!-- info -->
       <div class="grid grid-cols-2 gap-4" style="margin-top: var(--space-xl);">
         <div class="glass-subtle" style="padding: var(--space-lg);">
           <h3 style="color: var(--accent-color); margin-bottom: var(--space-sm);">🔒 Security</h3>

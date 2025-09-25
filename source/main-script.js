@@ -1,6 +1,3 @@
-// Fő JavaScript a weboldalhoz
-
-// Egyedi kurzor funkcionalitás célpontkiemeléssel
 function initCursor() {
   const cursor = document.getElementById('cursor');
   const cursorPt = document.getElementById('cursorPt');
@@ -15,9 +12,8 @@ function initCursor() {
   let exitTween = null;
   let enterTween = null;
 
-  // Forgatás indítása (GSAP)
   function startRotation() {
-    if (isOverTarget) return; // ha célpont fölött vagyunk, ne forogjon
+    if (isOverTarget) return; 
     gsap.set(cursor, { rotation: 0 });
     rotationTween = gsap.to(cursor, {
       rotation: 180,
@@ -35,7 +31,7 @@ function initCursor() {
     }
   }
 
-  // Esemény: egér mozgatás
+  // egér mozgatás esemény
   document.addEventListener("mousemove", (e) => {
     gsap.to(cursor, {autoAlpha: 1});
     gsap.to(cursorPt, {autoAlpha: 1});
@@ -56,7 +52,6 @@ function initCursor() {
     });
   });
 
-  // Prioritált interaktív célpont keresése (előnyben .card, majd kontrollok)
   let currentTarget = null;
 
   function getInteractiveTargetFromPoint(x, y) {
@@ -90,7 +85,6 @@ function initCursor() {
       ease: 'power2.out'
     });
 
-    // Szín hozzárendelés cél szerint
     if (target.classList && target.classList.contains('btn-primary')) {
       gsap.to(cursor, { '--color': '#3e58ffff', duration: 0.18 });
     } else if (target.classList && target.classList.contains('card')) {
@@ -122,7 +116,7 @@ function initCursor() {
     });
   }
 
-  // Pointer mozgatás követése célok belépéséhez/kilépéséhez
+  // pointer mozgatás követés
   document.addEventListener('pointermove', (e) => {
     const newTarget = getInteractiveTargetFromPoint(e.clientX, e.clientY);
 
@@ -150,12 +144,12 @@ function initCursor() {
     }
   });
 
-  // Dokumentum pointerleave kezelése
+  // dokumentum pointerleave kezelése
   document.addEventListener('pointerleave', () => {
     if (currentTarget) { handleLeaveTarget(currentTarget); currentTarget = null; }
   });
 
-  // Ablak elhagyás/megérkezés kezelése
+  // ablak elhagyás/megérkezés kezelése
   document.addEventListener('mouseleave', () => {
     gsap.to(cursor, { autoAlpha: 0 });
     gsap.to(cursorPt, { autoAlpha: 0 });
@@ -169,7 +163,7 @@ function initCursor() {
   startRotation();
 }
 
-// Navigáció ikon és menü kezelése
+// navigáció ikon és menü
 function initNavigation() {
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
@@ -188,7 +182,7 @@ function initNavigation() {
     }
   });
 
-  // Kattintás kívülre: menü bezárása
+  // menü bezárása
   document.addEventListener('click', (e) => {
     if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
       navToggle.classList.remove('active');
@@ -196,7 +190,7 @@ function initNavigation() {
     }
   });
 
-  // Linkre kattintva bezárás
+  // kattintva bezárás
   const navLinks = navMenu.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -206,7 +200,7 @@ function initNavigation() {
   });
 }
 
-// Simított görgetés horgonylinkekhez
+
 function initSmoothScrolling() {
   const links = document.querySelectorAll('a[href^="#"]');
   
@@ -227,7 +221,7 @@ function initSmoothScrolling() {
   });
 }
 
-// Scroll animációk IntersectionObserver-rel
+// scroll animációk
 function initScrollAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -252,7 +246,7 @@ function initScrollAnimations() {
   });
 }
 
-// Vágólap másolás kezelése
+// vágólap másolás
 function initClipboard() {
   const copyButtons = document.querySelectorAll('[data-copy]');
   
@@ -278,7 +272,7 @@ function initClipboard() {
   });
 }
 
-// Csillagmező generálása futásidőben (box-shadow stringek)
+// csillagmező generálása
 function generateStarField() {
   const configs = [
     { id: 'stars', count: 700, size: 1, afterTop: 2000, duration: 50, opacity: 0.85 },
@@ -293,7 +287,6 @@ function generateStarField() {
     configs.forEach(c => c.count = Math.max(20, Math.round(c.count * scale)));
   }
 
-  // Generáló függvény amit resize eseményre is tudunk újrahívni
   function build() {
     const vw = Math.max(window.innerWidth || document.documentElement.clientWidth, 1200);
     const vh = Math.max(window.innerHeight || document.documentElement.clientHeight, 800);
@@ -316,7 +309,7 @@ function generateStarField() {
         shadows.push(`${x}px ${y}px #FFF`);
       }
 
-      // Alap stílusok (megjegyzés: a main-styles.css felülírhat részleteket)
+      // alap stílusok
       container.style.width = `${cfg.size}px`;
       container.style.height = `${cfg.size}px`;
       container.style.background = 'transparent';
@@ -330,7 +323,7 @@ function generateStarField() {
       container.style.willChange = 'transform';
       container.style.opacity = cfg.opacity;
 
-      // after elem létrehozása/aktualizálása és DOM-hoz adása
+
       let after = document.getElementById(cfg.id + '-after');
       if (!after) {
         after = document.createElement('div');
@@ -353,7 +346,6 @@ function generateStarField() {
     });
   }
 
-  // Debounce resize handler -> újrageneráljuk a csillagokat a viewport változásakor
   let resizeTimer = null;
   window.addEventListener('resize', () => {
     if (resizeTimer) clearTimeout(resizeTimer);
@@ -362,11 +354,11 @@ function generateStarField() {
     }, 180);
   });
 
-  // Első generálás
+  // első gen.
   build();
 }
 
-// Inicializálás DOMContentLoaded után
+
 document.addEventListener('DOMContentLoaded', () => {
   try { generateStarField(); } catch (e) { console.warn('generateStarField failed', e); }
 
@@ -377,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initClipboard();
 });
 
-// Export a többi script számára
+
 window.mainScript = {
   initCursor,
   initNavigation,

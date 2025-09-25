@@ -1244,6 +1244,7 @@ eu.alienwarearena.com
 razer.com
 *.gov
 heki.lol
+hexitex.hu
 
 
 

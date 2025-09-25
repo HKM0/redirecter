@@ -1,4 +1,3 @@
-// Base64 segédfüggvények
 function toBase64(str) {
     return btoa(unescape(encodeURIComponent(str)));
 }
@@ -10,25 +9,39 @@ function fromBase64(str) {
     }
 }
 
-// Link generálása a felhasználói űrlapból
+// link generalo
 function generateLink() {
-    const rawUrl = document.getElementById("linkInput").value.trim();
+    const linkInput = document.getElementById("linkInput");
+    const rawUrl = linkInput ? linkInput.value.trim() : "";
+    
     if (!rawUrl) {
         showNotification("Please enter a valid URL.", "error");
         return;
     }
 
-    // Séma hiányában https:// hozzáfűzése
     let normalized = rawUrl;
+    
+    // nincs protokoll, https:// hozzaad
     if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(rawUrl)) {
         normalized = 'https://' + rawUrl;
     }
-
-    // URL ellenőrzés
+    
+    // normalizalt url www. del
+    normalized = normalized.replace(/^(https?:\/\/)www\./, '$1');
+    
+    // url check logic
     try {
-        new URL(normalized);
+        const urlObj = new URL(normalized);
+        //check url
+        if (!urlObj.hostname || urlObj.hostname.length < 1) {
+            throw new Error("Invalid hostname");
+        }
+        // domain extension check
+        if (!urlObj.hostname.includes('.') && !['localhost', 'store', 'launch'].includes(urlObj.hostname)) {
+            throw new Error("Invalid domain");
+        }
     } catch (e) {
-        showNotification("Please enter a valid URL format.", "error");
+        showNotification("Please enter a valid URL format. Example: pelda.com or https://pelda.com", "error");
         return;
     }
 
@@ -37,7 +50,7 @@ function generateLink() {
 
     const redirectLink = `${location.origin}${location.pathname}?link=${encodeURIComponent(url)}&newtab=${openNewTab}`;
     
-    // UI frissítése
+    // ui update
     const output = document.getElementById("output");
     const generatedLink = document.getElementById("generatedLink");
     const copyButton = document.getElementById("copyButton");
@@ -46,7 +59,7 @@ function generateLink() {
     generatedLink.textContent = redirectLink;
     output.style.display = "block";
     
-    // Másolás gomb beállítása
+    // masolas gomb
     copyButton.setAttribute('data-copy', redirectLink);
     copyButton.onclick = async () => {
         try {
@@ -59,7 +72,7 @@ function generateLink() {
         }
     };
     
-    // Teszt gomb
+    // teszt gomb
     testButton.onclick = () => {
         window.open(redirectLink, '_blank');
     };
@@ -67,7 +80,7 @@ function generateLink() {
     showNotification("Redirect link generated successfully!", "success");
 }
 
-// Űrlap elküldésének kezelése
+// urlap kuldes kezeles
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('redirectForm');
     if (form) {
@@ -78,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Értesítési rendszer (toast)
+// ertesitesi rendszer
 function showNotification(message, type = 'info') {
     const existingNotifications = document.querySelectorAll('.notification-toast');
     existingNotifications.forEach(notification => notification.remove());
@@ -133,12 +146,12 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Beúsztatás
+    // beusztatas
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 10);
     
-    // Automatikus eltávolítás
+    // automatikus eltavolitas
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => {
@@ -149,17 +162,17 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Ellenőrzés és átirányítás a query param alapján
+// ellenorzes + atiranyitas query param alapjan
 async function checkAndRedirect() {
     const params = new URLSearchParams(window.location.search);
     const link = params.get("link");
     const newtab = params.get("newtab") === "1";
 
-    if (!link) return; // nincs paraméter --> maradunk az UI-n
+    if (!link) return; 
 
     const decodedLink = fromBase64(link);
     if (!decodedLink) {
-        // Hibás link: egyszerű hibaoldal
+        // hibas link oldal
         document.body.innerHTML = `
             <div id="cursor"></div>
             <div id="cursorPt"></div>
@@ -184,7 +197,6 @@ async function checkAndRedirect() {
         return;
     }
 
-    // Ha edit=1 akkor töltsük be az űrlapot és ne irányítsunk át
     if (params.get('edit') === '1') {
         const linkInput = document.getElementById('linkInput');
         const newTabCheckbox = document.getElementById('newTabCheckbox');
@@ -211,7 +223,6 @@ async function checkAndRedirect() {
                 window.location.href = decodedLink;
             }
         } else {
-            // Nem megbízható: jóváhagyást kérünk
             const encodedParam = encodeURIComponent(link);
             document.body.innerHTML = `
                 <div id="cursor"></div>
@@ -241,7 +252,6 @@ async function checkAndRedirect() {
             }
         }
     } catch (error) {
-        // Trusted lista betöltése sikertelen: figyelmeztetés
         document.body.innerHTML = `
             <div id="cursor"></div>
             <div id="cursorPt"></div>
@@ -264,5 +274,4 @@ async function checkAndRedirect() {
     }
 }
 
-// Oldal betöltésekor ellenőrizünk paramétereket
 window.addEventListener('DOMContentLoaded', checkAndRedirect);

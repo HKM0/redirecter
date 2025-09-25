@@ -9,12 +9,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-  <!-- Csillagmezők (parallax) -->
+  <!-- csillagmezok -->
   <div id="stars" aria-hidden="true"></div>
   <div id="stars2" aria-hidden="true"></div>
   <div id="stars3" aria-hidden="true"></div>
 
-  <!-- Hullócsillagok -->
+  <!-- hullocsillagok -->
   <section class="shooting-stars" aria-hidden="true">
     <span></span>
     <span></span>
@@ -28,25 +28,23 @@
     <span></span>
   </section>
 
-  <!-- Egyedi kurzor elemek -->
+  <!-- kurzor -->
   <div id="cursor"></div>
   <div id="cursorPt"></div>
 
-  <!-- Navigáció -->
+  <!-- navigacio -->
   <nav class="nav">
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
       <span class="sr-only">Menu</span>
     </button>
     <div class="nav-menu" id="navMenu">
-      <a href="#home" class="nav-link">Home</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="redirecter.html" class="nav-link">URL Redirecter</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#home" class="nav-link-active">Home</a>
+      <a href="redirecter" class="nav-link">URL Redirecter</a>
+      <a href="elteikbsc" class="nav-link">ELTE IK BSC</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- hero section -->
   <section id="home" class="section flex flex-col items-center justify-center text-center" style="min-height: 100vh;">
     <div class="container">
       <h1 class="heading-1 text-gradient">Heki</h1>
@@ -62,7 +60,7 @@
     </div>
   </section> 
 
-  <!-- Projects Section -->
+  <!-- projects section -->
   <section id="projects" class="section">
     <div class="container">
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
@@ -91,19 +89,19 @@
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Home Website</h3>
+            <h3 class="card-title">ELTE IK jegyzetek</h3>
             <p class="card-description">
-              Modern portfolio built with clean HTML, CSS, and vanilla JavaScript. 
-              Features glass morphism design and smooth animations.
+                A user-friendly viewer for the GitHub repository. 
+                Features syntax highlighting, and support for various document types.
             </p>
           </div>
           <div style="margin-top: auto;">
             <div style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-lg); flex-wrap: wrap;">
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">HTML5</span>
               <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">CSS3</span>
-              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">Design</span>
-              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">UI/UX</span>
+              <span style="padding: 2px 8px; background: rgba(99, 102, 241, 0.1); color: var(--accent-color); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">JavaScript</span>
             </div>
-            <button class="btn btn-glass" style="width: 100%;" disabled>Current Page</button>
+            <a href="elteikbsc.html" class="btn btn-primary" style="width: 100%;">View Project</a>
           </div>
         </div>
 
@@ -128,7 +126,7 @@
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- about section -->
   <section id="about" class="section">
     <div class="container">
       <div class="grid grid-cols-2 gap-6 items-center">
@@ -174,7 +172,7 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- contact section -->
   <section id="contact" class="section">
     <div class="container text-center">
       <h2 class="heading-2" style="margin-bottom: var(--space-lg);">Find me here</h2>

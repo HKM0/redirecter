@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELTE IK BSC - jegyzetek 📚</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="source/main-styles.css">
+  <link rel="stylesheet" href="source/elteikbsc-styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+  <!-- csillagok -->
+  <div id="stars" aria-hidden="true"></div>
+  <div id="stars2" aria-hidden="true"></div>
+  <div id="stars3" aria-hidden="true"></div>
+
+  <!-- hullocsillagok -->
+  <section class="shooting-stars" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </section>
+
+  <!-- kurzor -->
+  <div id="cursor"></div>
+  <div id="cursorPt"></div>
+
+  <!-- navigacio -->
+  <nav class="nav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span class="sr-only">Menu</span>
+    </button>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="redirecter.html" class="nav-link">URL Redirecter</a>
+      <a href="#" class="nav-link-active">ELTE IK BSC</a>
+    </div>
+  </nav>
+
+  <!-- fo tartalom -->
+  <div class="container">
+    <div class="elte-container">
+      <div class="elte-sidebar">
+        <div class="sidebar-title">📚 ELTE IK jegyzetek</div>
+        <div id="sidebar"></div>
+      </div>
+      <div class="elte-content">
+        <div id="content" class="empty-state">Válassz egy fájlt a bal oldalon a tartalom megtekintéséhez.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="source/main-script.js"></script>
+  <script src="source/autoPageLogic.js"></script>
+</body>
+</html>

@@ -1,29 +1,41 @@
-# redirecter
+# 🌟 Heki Personal Website & Tools
 
-Egyszerű URL redirecter: base64-kódolja a cél URL-t, ellenőrzi a domain-t a `source/trusted.txt` alapján, és vagy azonnal átirányít (ha megbízható), vagy megerősítést kér.
+---
 
-Röviden hogyan működik:
-- Felhasználó megad egy URL-t az oldalon.
-- A kliens JS Base64-re kódolja az URL-t és létrehoz egy linket: `?link=<base64>&newtab=0|1`.
-- Az oldal ellenőrzi a `link` query-t, dekódolja, betölti a `source/trusted.txt`-et és eldönti, hogy automatikusan átirányít vagy megerősítést kér.
+# 🔧 Használat
 
-Python: legegyszerűbb módja a redirect link előállításának (a szerver/hosting címét és az oldal elérési útját add meg a `base_url`-ban):
+## URL Redirecter
+1. Írj be egy URL-t a mezőbe
+2. Válaszd ki, hogy új lapon nyíljon-e meg
+3. Kattints a "Generate Redirect Link" gombra
+4. Másold ki a generált linket
 
-```python
-import base64
-import urllib.parse
-import re
+## ELTE Tananyag Böngésző
+- A bal oldali navigációs sávval böngészheted a mappákat és fájlokat.
+- Kattints a fájlokra a tartalom megtekintéséhez
+- A mappaszerű navigációs elemekkel visszanavigálhatsz
 
-def make_redirect_link(base_url, target_url, newtab=False):
-    # séma hozzáadása ha hiányzik
-    if not re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*://', target_url):
-        target_url = 'https://' + target_url
+---
 
-    b64 = base64.b64encode(target_url.encode('utf-8')).decode('ascii')
-    return f"{base_url}?link={urllib.parse.quote(b64)}&newtab={'1' if newtab else '0'}"
+# 🛠️
 
-# példa
-print(make_redirect_link('https://example.com/redirecter.html', 'example.com/path', True))
-```
+- **HTML5** - Szemantikus markup
+- **CSS3** - Modern styling, CSS változók, animációk
+- **JavaScript (ES6+)** - Interaktív funkcionalitás
+- **GSAP** - Fejlett animációk és kurzor effektek
+- **GitHub API** - Repository tartalom betöltése
+- **Highlight.js** - Kód szintaxis kiemelés
 
-Ez pontosan reprodukálja azt a URL-formátumot, amit a `source/script.js` vár: a `link` param Base64, és `newtab=1` vagy `0`.
+---
+
+# ⚙️ későbbre
+
+- **Syntax** - highlight bővitése és különböző fájlok támogatása.
+- **PDF** - megjelenítés iframe-ben.
+- **Olvashatóság** - méretek és megjelenítések kezelése különböző eszközökön.
+- **Akadálymentesség** - wcag szabályok implementálása
+- **Jegyzetek** - saját jegyzetek hozzáadása hibák javítása.
+
+---
+
+**HKM0** - szeretem a tejet!

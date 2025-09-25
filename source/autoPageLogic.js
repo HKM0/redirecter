@@ -117,13 +117,13 @@ async function loadFile(path) {
     const code = await fetch(url).then(r => r.text());
     const language = ext === "hs" || ext === "haskell" ? "haskell" : 
                     ext === "cs" || ext === "csharp" ? "csharp" : ext;
-    contentHtml += `<pre><code class="language-${language}">${escapeHtml(code)}</code></pre>`;
+    contentHtml += `<pre class="code-block"><code class="language-${language}">${escapeHtml(code)}</code></pre>`;
     content.innerHTML = contentHtml;
     hljs.highlightAll();
     return;
   } else if (["txt"].includes(ext)) {
     const text = await fetch(url).then(r => r.text());
-    contentHtml += `<pre style="background: rgba(255, 255, 255, 0.05); color: var(--text-primary);">${escapeHtml(text)}</pre>`;
+    contentHtml += `<pre class="code-block" style="background: rgba(255, 255, 255, 0.05); color: var(--text-primary);">${escapeHtml(text)}</pre>`;
   } else {
     contentHtml += `
       <div style="text-align: center; padding: var(--space-3xl);">

@@ -1,7 +1,7 @@
 .elte-container {
   display: flex;
   gap: var(--space-lg);
-  min-height: calc(100vh - 120px);
+  min-height: calc(80vh - 120px);
   padding-top: 80px;
   padding-left: -0px;
   padding-right: 0px;
@@ -26,11 +26,11 @@
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   padding: var(--space-xl);
   box-shadow: var(--glass-shadow);
   overflow-x: auto;
-  min-height: calc(100vh - 180px);
+  min-height: calc(80vh - 180px);
 }
 
 .sidebar-link {
@@ -147,7 +147,7 @@
 .empty-state {
   text-align: center;
   color: var(--text-muted);
-  padding: var(--space-3xl);
+  padding: var(--space-xs);
   font-style: italic;
 }
 
@@ -158,14 +158,29 @@
   direction: ltr !important;
 }
 
+  .elte-content .code-block {
+    margin: var(--space-xs) 0;
+    padding: 0;
+    font-size: var(--space-md);
+    line-height: 1.2;
+    border-radius: var(--radius-sm);
+  }
+
 /* responsive */
 @media (max-width: 768px) {
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   .elte-container {
     flex-direction: column;
     padding-top: 60px;
-    gap: var(--space-md);
-    padding-left: 0px;
-    padding-right: 0px;
+    gap: var(--space-xs);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    margin: 0;
   }
   
   .elte-sidebar {
@@ -173,14 +188,50 @@
     min-width: auto;
     position: relative;
     top: auto;
+    margin: 0;
+    padding: var(--space-sm);
   }
   
   .elte-content {
-    padding: var(--space-md);
-    min-height: calc(100vh - 240px);
+    padding: var(--space-xs);
+    min-height: calc(100vh - 160px);
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  .elte-content pre {
+    margin: var(--space-xs) 0;
+    padding: var(--space-xs);
+    overflow-x: auto;
+    white-space: pre;
+    font-size: var(--font-size-xs);
+    line-height: 1.3;
+    border-radius: var(--radius-sm);
+  }
+
+  .elte-content pre code {
+    font-size: var(--font-size-xs);
+    white-space: pre;
+  }
+
+  .elte-content .code-block {
+    margin: var(--space-xs) 0;
+    padding: 0;
+    font-size: 10px;
+    line-height: 1.2;
+    border-radius: var(--radius-sm);
+  }
+
+  .elte-content .code-block code {
+    font-size: 10px;
   }
 
   .elte-content iframe {
-    min-height: calc(100vh - 320px);
+    min-height: calc(100vh - 200px);
+  }
+
+  .elte-content h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-sm);
   }
 }

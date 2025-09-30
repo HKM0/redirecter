@@ -109,7 +109,7 @@ async function loadFile(path) {
           background: var(--secondary-bg);
         " onclick="window.open('${url}', '_blank')" />
         <p style="color: var(--text-muted); font-size: var(--font-size-sm); margin-top: var(--space-sm);">
-          Click the image for full size view
+          Click the image for full size view!
         </p>
       </div>
     `;
@@ -129,7 +129,7 @@ async function loadFile(path) {
       <div style="text-align: center; padding: var(--space-3xl);">
         <div style="font-size: 4rem; margin-bottom: var(--space-lg);">📎</div>
         <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">
-          I was not ale to display this file in your browser!
+          I was not able to display this file in your browser!
         </p>
         <a href="${url}" target="_blank" class="file-download">💾 Download: ${fileName}</a>
       </div>

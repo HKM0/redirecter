@@ -92,7 +92,7 @@ async function loadFile(path) {
                 onerror="this.src='${googleViewerUrl}'">
         </iframe>
         <div style="margin-top: var(--space-md); text-align: center; display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-          <a href="${url}" target="_blank" class="file-download">📄 Open original PDFa</a>
+          <a href="${url}" target="_blank" class="file-download">📄 Open original PDF</a>
           <a href="${googleViewerUrl}" target="_blank" class="file-download" style="background: #4285f4;">📖 Google Docs Viewer</a>
         </div>
       </div>

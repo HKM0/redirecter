@@ -19,7 +19,7 @@ async function loadDir(path = "") {
 
   const parts = path.split("/").filter(Boolean);
   const rootLink = document.createElement("a");
-  rootLink.textContent = "🏠 Gyökér";
+  rootLink.textContent = "🏠 Home";
   rootLink.onclick = () => loadDir("");
   breadcrumb.appendChild(rootLink);
 
@@ -92,7 +92,7 @@ async function loadFile(path) {
                 onerror="this.src='${googleViewerUrl}'">
         </iframe>
         <div style="margin-top: var(--space-md); text-align: center; display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-          <a href="${url}" target="_blank" class="file-download">📄 Eredeti PDF megnyitása</a>
+          <a href="${url}" target="_blank" class="file-download">📄 Open original PDFa</a>
           <a href="${googleViewerUrl}" target="_blank" class="file-download" style="background: #4285f4;">📖 Google Docs Viewer</a>
         </div>
       </div>
@@ -109,7 +109,7 @@ async function loadFile(path) {
           background: var(--secondary-bg);
         " onclick="window.open('${url}', '_blank')" />
         <p style="color: var(--text-muted); font-size: var(--font-size-sm); margin-top: var(--space-sm);">
-          Kattints a képre a teljes méretű megjelenítéshez
+          Click the image for full size view
         </p>
       </div>
     `;
@@ -129,9 +129,9 @@ async function loadFile(path) {
       <div style="text-align: center; padding: var(--space-3xl);">
         <div style="font-size: 4rem; margin-bottom: var(--space-lg);">📎</div>
         <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">
-          Ez a fájl nem jeleníthető meg közvetlenül a böngészőben.
+          I was not ale to display this file in your browser!
         </p>
-        <a href="${url}" target="_blank" class="file-download">💾 Letöltés: ${fileName}</a>
+        <a href="${url}" target="_blank" class="file-download">💾 Download: ${fileName}</a>
       </div>
     `;
   }
